@@ -1,0 +1,22 @@
+<!-- index.html -->
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mx-auto py-8 px-4">
+    <h1 class="text-4xl font-bold mb-10 text-center">Explore Our Exclusive Products</h1>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        {% for p in product %}
+        <div class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition-shadow transform hover:-translate-y-1">
+            <img src="{{url_for('image',filename=p.image )}}" alt="Product Image" class="w-full h-60 object-cover">
+            <div class="p-5">
+                <h2 class="text-xl font-bold mb-1 text-gray-800">{{p.title}}</h2>
+                <p class="text-gray-600 mb-3">Price: <span class="text-green-600 font-semibold">${{p.price}}</span></p>
+                <a href="{{url_for('cart',pid=p.id)}}" 
+                   class="w-full text-center bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-medium px-4 py-2 rounded-lg hover:bg-gradient-to-r hover:from-blue-600 hover:to-indigo-600 transition duration-300 block">
+                    Add to Cart
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

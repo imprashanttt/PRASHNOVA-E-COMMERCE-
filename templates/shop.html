@@ -1,0 +1,47 @@
+<!-- shop.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mx-auto py-8">
+    <h1 class="text-3xl font-bold mb-6 text-center">Shop</h1>
+
+    <!-- Filter Section -->
+    <div class="flex flex-col md:flex-row justify-between mb-6">
+        <!-- Filter Form -->
+        <form method="post" action="{{ url_for('shop') }}" class="bg-white shadow-lg p-4 rounded-lg mb-4 md:mb-0 md:w-1/4">
+            <h2 class="text-xl font-bold mb-4">Filter By Category</h2>
+            <div class="space-y-2">
+                <div>
+                    <input type="checkbox" name="category" value="Pant" id="pant" class="mr-2">
+                    <label for="pant">Pant</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="category" value="Shirt" id="shirt" class="mr-2">
+                    <label for="shirt">Shirt</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="category" value="T-Shirt" id="tshirt" class="mr-2">
+                    <label for="tshirt">T-Shirt</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="category" value="Accessories" id="accessories" class="mr-2">
+                    <label for="accessories">Accessories</label>
+                </div>
+            </div>
+            <button type="submit" class="mt-4 w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition">Apply Filters</button>
+        </form>
+
+        <!-- Product Section -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full md:w-3/4">
+            {% for product in products %}
+            <div class="bg-white shadow-lg rounded-lg p-4 hover:shadow-xl transition">
+                <img src="{{ url_for('image', filename=product.image) }}" alt="{{ product.title }}" class="w-full h-48 object-cover rounded">
+                <h2 class="text-xl font-bold mt-4">{{ product.title }}</h2>
+                <p class="text-gray-700">${{ product.price }}</p>
+                <a href="/cart/{{ product.id }}" class="mt-2 block text-center bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition">Buy</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
